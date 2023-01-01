@@ -1,2 +1,2 @@
 # projectMic
-Trying to learn about mircoservices following nick jackson series from youtube.
+Learning about mircoservices following nick jackson series from youtube.
