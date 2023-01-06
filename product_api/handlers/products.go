@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"context"
+	"fmt"
 	"github/Ely0rda/projectMic/product_api/data"
 	"log"
 	"net/http"
@@ -67,7 +68,17 @@ func (p *Products) MiddlewareProductValidation(next http.Handler) http.Handler {
 			http.Error(rw, "Unable to unmarshal json", http.StatusBadRequest)
 			return
 		}
-
+		//validate product
+		err = prod.Validate()
+		if err != nil {
+			p.l.Println("[ERROR} validating product", err)
+			http.Error(
+				rw,
+				fmt.Sprintf("Error validating product %s", err),
+				http.StatusBadRequest,
+			)
+			return
+		}
 		ctx := context.WithValue(r.Context(), KeyProduct{}, prod)
 		req := r.WithContext(ctx)
 		next.ServeHTTP(rw, req)
