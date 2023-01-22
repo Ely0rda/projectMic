@@ -1,0 +1,6 @@
+post request:
+    curl localhost:9090 -XPOST -d '{"name":"warm chocola","description":"warm cup of chocola","price":7,"sku":"abc-agc-ahu"}' -v
+get request:
+    curl localhost:9090 -v | jq
+put request:
+      curl localhost:9090/3 -XPUT -d '{"name":"tea","description":"warm cup of tea","price":4,"sku":"abc-agc-ahu"}' -v
